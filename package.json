@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "watch": "esbuild --bundle src/index.js --outfile=src/bundle.js",
-    "build": "rm -r dist/*; esbuild --bundle src/index.js --outfile=dist/bundle.js && cp src/index.html src/style.css src/aes.js dist/",
+    "build": "rm -rf dist/*; esbuild --bundle src/index.js --outfile=dist/bundle.js && cp src/index.html src/style.css src/aes.js dist/",
+    "buildwindows": "rmdir /s /q dist && mkdir dist && esbuild --bundle src/index.js --outfile=dist/bundle.js && copy src\\index.html dist\\ && copy src\\style.css dist\\ && copy src\\aes.js dist\\",
     "serve": "npm run watch & cd src; npx http-server",
-    "serve:dist": "npm run build && cd dist; npx http-server",
+    "serve:dist": "npm run build && cd dist; npx http-server -c-1",
     "lint": "prettier --write src/"
   },
   "dependencies": {

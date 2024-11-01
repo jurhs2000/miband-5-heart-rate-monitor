@@ -35,6 +35,7 @@
         </div>
       </div>
       <div class="hr d-none">
+        <span class="center-container" id="alert">Estado: Despierto</span>
         <h1 id="heartrate">
           <span id="hr">-</span><span class="unit">BPM</span>
         </h1>
@@ -46,6 +47,7 @@
     <script>
       const chart = new Chart("#chart");
       const hr = document.querySelector("#hr");
+      const alertElement = document.querySelector("#alert");
       const connectButton = document.querySelector("#connect-button");
       const keyInput = document.querySelector("#auth-key");
       const initBox = document.querySelector(".init");
@@ -66,6 +68,9 @@
           console.log("Got heartrate", e.detail);
           hr.innerText = e.detail;
           chart.update(e.detail);
+        });
+        window.addEventListener("alert", (e) => {
+          alertElement.innerText = e.detail;
         });
         try {
           window.miband = new MiBand5(authKey);
